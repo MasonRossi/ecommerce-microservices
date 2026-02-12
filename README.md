@@ -11,7 +11,7 @@ Prerequisites
 - Maven (or use Maven wrapper)
 
 1. Clone The Repository
-git clone <your-repo-url>
+git clone https://github.com/MasonRossi/ecommerce-microservices.git
 cd ecommerce-microservices
 
 2. Run With Docker Compose
