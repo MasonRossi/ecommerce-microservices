@@ -22,10 +22,10 @@ jobs:
           distribution: temurin
 
       - name: Build Product Service
-        run: mvn -f product-service/pom.xml clean test
+        run: mvn -f productService/pom.xml clean test
 
       - name: Build Order Service
-        run: mvn -f order-service/pom.xml clean test
+        run: mvn -f orderService/pom.xml clean test
 
   docker:
 
