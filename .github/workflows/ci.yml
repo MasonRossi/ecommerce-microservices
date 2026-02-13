@@ -27,6 +27,15 @@ jobs:
       - name: Build Order Service
         run: mvn -f orderService/pom.xml clean test
 
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            product-service/target/surefire-reports
+            order-service/target/surefire-reports
+
+
   docker:
 
     runs-on: ubuntu-latest

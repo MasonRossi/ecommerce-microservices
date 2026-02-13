@@ -11,3 +11,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+product:
+  service:
+    url: http://localhost:8081

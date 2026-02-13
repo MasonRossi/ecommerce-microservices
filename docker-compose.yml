@@ -8,6 +8,8 @@ services:
       - "8081:8081"
     networks:
       - micro-net
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081/api/products"]
       interval: 10s
@@ -19,6 +21,8 @@ services:
       - "8082:8082"
     networks:
       - micro-net
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       product-service:
         condition: service_healthy
