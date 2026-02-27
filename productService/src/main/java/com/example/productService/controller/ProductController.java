@@ -2,6 +2,8 @@ package com.example.productService.controller;
 
 
 import com.example.productService.entity.Product;
+import com.example.productService.repository.ProductRepository;
+import com.example.productService.service.FeatureFlagService;
 import com.example.productService.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +13,13 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
     private final ProductService service;
+    private final FeatureFlagService featureFlagService;
+    private final ProductRepository repo;
 
-    public ProductController(ProductService service) {
+    public ProductController(ProductService service, FeatureFlagService featureFlagService, ProductRepository repo) {
         this.service = service;
+        this.featureFlagService = featureFlagService;
+        this.repo = repo;
     }
 
     @GetMapping
@@ -34,5 +40,26 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @GetMapping("/premium")
+    public List<Product> getPremiumProducts() {
+        boolean premiumEnabled = featureFlagService.isPremiumPricingEnabled();
+
+        return repo.findAll()
+                .stream()
+                .map(p -> {
+                    if (premiumEnabled) {
+                        // create a copy instead of mutating the managed entity
+                        return new Product(
+                                p.getId(),
+                                p.getName(),
+                                p.getPrice() * 0.9,
+                                p.getQuantity()
+                        );
+                    }
+                    return p;
+                })
+                .toList();
     }
 }
