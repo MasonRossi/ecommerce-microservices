@@ -16,3 +16,7 @@ spring:
   h2:
     console:
       enabled: true
+unleash:
+  api-url: http://localhost:4242/api
+  app-name: product-service
+  instance-id: product-service-1

@@ -15,3 +15,7 @@ spring:
 product:
   service:
     url: http://localhost:8081
+unleash:
+  api-url: http://localhost:4242/api
+  app-name: order-service
+  instance-id: order-service-1
