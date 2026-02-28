@@ -88,9 +88,12 @@ jobs:
           done
 
       - name: Initialize feature flags
+        env:
+          UNLEASH_ADMIN_TOKEN: ${{ secrets.UNLEASH_ADMIN_TOKEN }}
         run: |
           chmod +x scripts/init-flags.sh
           scripts/init-flags.sh
+    
 
       - name: Create sample product for testing
         run: |
