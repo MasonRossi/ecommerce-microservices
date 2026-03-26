@@ -30,4 +30,9 @@ public class OrderController {
     public Order create(@RequestBody Order order) {
         return service.create(order);
     }
+
+    @GetMapping("/version")
+    public String version() {
+        return "v2";
+    }
 }
